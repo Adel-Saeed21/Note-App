@@ -5,7 +5,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const  Row(
       children: [
         Text('Notes', style: TextStyle(fontSize: 28)),
         Spacer(),
@@ -28,7 +28,7 @@ class CustomSearchIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
-        child: IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 28)),
+        child: IconButton(onPressed: () {}, icon:const Icon(Icons.search, size: 28)),
       ),
     );
   }

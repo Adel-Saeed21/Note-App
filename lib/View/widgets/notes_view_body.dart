@@ -8,11 +8,11 @@ class NotesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         children: [
-          const SizedBox(height: 30),
+           SizedBox(height: 30),
           CustomAppBar(),
           Expanded(child: NotesListView()),
         ],
@@ -28,7 +28,7 @@ class NoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xffFFCC80),
+        color: const Color(0xffFFCC80),
         borderRadius: BorderRadius.circular(16),
       ),
       padding: const EdgeInsets.only(top: 24, bottom: 24, left: 16),
@@ -36,9 +36,9 @@ class NoteItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           ListTile(
-            title: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: const Text(
+            title: const Padding(
+              padding:  EdgeInsets.only(bottom: 16.0),
+              child:  Text(
                 "Flutter Tips",
                 style: TextStyle(color: Colors.black, fontSize: 26),
               ),
@@ -47,16 +47,16 @@ class NoteItem extends StatelessWidget {
               "Build career with Adel Saeed",
               style: TextStyle(
                 color: Colors.black.withValues(alpha: .5),
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
             trailing: IconButton(
               onPressed: () {},
-              icon: Icon(FontAwesomeIcons.trash, size: 24, color: Colors.black),
+              icon:const Icon(FontAwesomeIcons.trash, size: 24, color: Colors.black),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 24.0, top: 16),
+        const  Padding(
+            padding:  EdgeInsets.only(right: 24.0, top: 16),
             child: Text(
               "May21 ,2022",
               style: TextStyle(color: Colors.black, fontSize: 16),
@@ -67,4 +67,3 @@ class NoteItem extends StatelessWidget {
     );
   }
 }
-
