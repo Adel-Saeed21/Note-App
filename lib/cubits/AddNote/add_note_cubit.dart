@@ -6,7 +6,7 @@ import 'package:notetest/model/note_model.dart';
 part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
-  AddNoteCubit(super.initialState);
+  AddNoteCubit() : super(AddNoteInitial());
 
   addNote(NoteModel note) async {
     //to save in database
@@ -15,6 +15,7 @@ class AddNoteCubit extends Cubit<AddNoteState> {
     try {
       var notesBox = Hive.box<NoteModel>(knotesBox);
       await notesBox.add(note);
+
       emit(AddNoteSuccess());
     } on Exception catch (e) {
       emit(AddNoteFailure(e.toString()));
