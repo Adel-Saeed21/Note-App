@@ -7,7 +7,7 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit(super.initialState);
 
   addNote(NoteModel note){
-     
+     //to save in database
   }
 
 }

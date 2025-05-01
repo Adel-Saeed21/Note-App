@@ -13,3 +13,9 @@ class AddNoteFailure extends AddNoteState {
 
   AddNoteFailure(this.errMessage);
 }
+/*
+identify state
+write  logic
+provide cubit
+
+ */
