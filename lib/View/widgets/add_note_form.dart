@@ -1,6 +1,11 @@
+// ignore_for_file: unnecessary_type_check
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notetest/View/widgets/custom_button.dart';
 import 'package:notetest/View/widgets/custom_text_field.dart';
+import 'package:notetest/cubits/AddNote/add_note_cubit.dart';
+import 'package:notetest/model/note_model.dart';
 
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({super.key});
@@ -38,14 +43,28 @@ class _AddNoteFormState extends State<AddNoteForm> {
           ),
           const SizedBox(height: 16),
           const SizedBox(height: 32),
-          CustomButton(
-            onTap: () {
-              if (formkey.currentState!.validate()) {
-                formkey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return CustomButton(
+              
+                isLoading: state is AddNoteState?true:false,
+                onTap: () {
+                  if (formkey.currentState!.validate()) {
+                    formkey.currentState!.save();
+                    var noteModel = NoteModel(
+                      title: title!,
+                      subTitle: subtitle!,
+                      date: DateTime.now().toString(),
+                      // ignore: deprecated_member_use
+                      color: Colors.blue.value,
+                    );
+                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              );
             },
           ),
           const SizedBox(height: 16),
