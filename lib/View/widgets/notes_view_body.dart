@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notetest/View/edit_note.dart';
 import 'package:notetest/View/widgets/custom_app_bar.dart';
 import 'package:notetest/View/widgets/notes_list_view.dart';
+import 'package:notetest/cubits/notes_cubit/notes_cubit.dart';
+import 'package:notetest/model/note_model.dart';
 
-class NotesViewBody extends StatelessWidget {
+class NotesViewBody extends StatefulWidget {
   const NotesViewBody({super.key});
+
+  @override
+  State<NotesViewBody> createState() => _NotesViewBodyState();
+}
+
+class _NotesViewBodyState extends State<NotesViewBody> {
+  @override
+  void initState() {
+    BlocProvider.of<NotesCubit>(context).fetchAllNotes();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +37,8 @@ class NotesViewBody extends StatelessWidget {
 }
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({super.key, required this.noteModel});
+  final NoteModel noteModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,15 +57,15 @@ class NoteItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
-              title: const Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
-                  "Flutter Tips",
-                  style: TextStyle(color: Colors.black, fontSize: 26),
+                  noteModel.title,
+                  style: const TextStyle(color: Colors.black, fontSize: 26),
                 ),
               ),
               subtitle: Text(
-                "Build career with Adel Saeed",
+                noteModel.subTitle,
                 style: TextStyle(
                   color: Colors.black.withValues(alpha: .5),
                   fontSize: 16,
@@ -66,11 +80,11 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(right: 24.0, top: 16),
+            Padding(
+              padding: const EdgeInsets.only(right: 24.0, top: 16),
               child: Text(
-                "May21 ,2022",
-                style: TextStyle(color: Colors.black, fontSize: 16),
+                noteModel.date,
+                style: const TextStyle(color: Colors.black, fontSize: 16),
               ),
             ),
           ],
